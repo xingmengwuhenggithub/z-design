@@ -115,6 +115,6 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "zeng-design-test": "^1.0.1"
+    "zeng-design-test": "^1.0.3"
   }
 }

@@ -27,7 +27,7 @@ const baseConfig = defineConfig({
   ],
   external: ['vue'],
   output: {
-    name: 'naive',
+    name: 'zeng',
     format: 'umd',
     exports: 'named',
     globals: {
@@ -36,20 +36,41 @@ const baseConfig = defineConfig({
   }
 })
 
-// const devConfig = defineConfig({
-//   plugins: [
-//     replace({
-//       values: {
-//         __DEV__: JSON.stringify(true),
-//         'process.env.NODE_ENV': JSON.stringify('development')
-//       },
-//       preventAssignment: true
-//     })
-//   ],
-//   output: {
-//     file: path.resolve('dist/index.js')
-//   }
-// })
+const esmConfig = defineConfig({
+  input: path.resolve('./src/index.ts'),
+  plugins: [
+    nodeResolve({ extensions }),
+    esbuild({
+      tsconfig: path.resolve(__dirname, 'tsconfig.esbuild.json'),
+      target: 'esnext',
+      sourceMap: true
+    }),
+    babel({
+      extensions,
+      babelHelpers: 'bundled'
+    }),
+    replace({
+      values: {
+        __DEV__: JSON.stringify(true),
+        'process.env.NODE_ENV': JSON.stringify('production')
+      },
+      preventAssignment: true
+    }),
+    commonjs()
+  ],
+  external: ['vue'],
+  output: {
+    // file: path.resolve('dist/es/index.js'),
+    dir: path.dirname('dist/es/bundle.js'),
+    format: 'es',
+    exports: 'named', // 指定导出模式（自动、默认、命名、无）
+    preserveModules: true, // 保留模块结构
+    preserveModulesRoot: 'src', // 将保留的模块放在根级别的此路径下
+    globals: {
+      vue: 'Vue'
+    }
+  }
+})
 
 const prodConfig = defineConfig({
   plugins: [
@@ -67,4 +88,4 @@ const prodConfig = defineConfig({
   }
 })
 
-module.exports = [merge(baseConfig, prodConfig)]
+module.exports = [merge(baseConfig, prodConfig),esmConfig]
