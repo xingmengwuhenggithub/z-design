@@ -1,3 +1,4 @@
 import Button from './button'
-// export * from './loading'
-export {Button}
+import Loading from './loading'
+
+export {Button,Loading}

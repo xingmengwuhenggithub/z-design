@@ -113,5 +113,8 @@
     "vue"
   ],
   "author": "",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "zeng-design-test": "^1.0.1"
+  }
 }
