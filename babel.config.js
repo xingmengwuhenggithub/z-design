@@ -11,5 +11,6 @@ module.exports = {
               targets: '>2%, not IE 11'
             }
           ]
-        ]
+        ],
+    plugins: ["@vue/babel-plugin-jsx"]
 }

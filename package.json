@@ -115,6 +115,7 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
+    "@vue/babel-plugin-jsx": "^1.1.6",
     "zeng-design-test": "^1.0.3"
   }
 }
